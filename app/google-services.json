@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "786512582258",
+    "firebase_url": "https://schat-8b187-default-rtdb.firebaseio.com",
+    "project_id": "schat-8b187",
+    "storage_bucket": "schat-8b187.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786512582258:android:efa1d3faf4a33ea4ee94eb",
+        "android_client_info": {
+          "package_name": "com.shivakoshta.schat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786512582258-eofnoed4fdk06isf24ek2b8rmqm3pm19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuCTeLLXCFFENbSeZxJMXEUnUAvRKEu5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786512582258-eofnoed4fdk06isf24ek2b8rmqm3pm19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

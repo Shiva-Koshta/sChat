@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,10 +24,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
         this.context = context;
         messageModelsList = new ArrayList<>();
     }
-    public void add(MessageModel userModel)
+    public void add(MessageModel messageModel)
     {
-        messageModelsList.add(userModel);
-        notifyDataSetChanged();
+        if(!messageModelsList.contains(messageModel)) {
+            messageModelsList.add(messageModel);
+            notifyDataSetChanged();
+        }
     }
     public void clear()
     {
@@ -45,14 +48,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         MessageModel messageModel = messageModelsList.get(position);
         holder.message.setText(messageModel.getMessage());
+        holder.name.setText(messageModel.getName());
         if(messageModel.getSenderID().equals(FirebaseAuth.getInstance().getUid()))
         {
-            holder.main.setBackgroundColor(context.getResources().getColor(R.color.messenger_blue));
+//            holder.main.setBackgroundColor(context.getResources().getColor(R.color.messenger_blue));
             holder.message.setBackgroundColor(context.getResources().getColor(R.color.white));
         }
         else
         {
-            holder.main.setBackgroundColor(context.getResources().getColor(R.color.black));
+//            holder.main.setBackgroundColor(context.getResources().getColor(R.color.black));
             holder.message.setBackgroundColor(context.getResources().getColor(R.color.white));
         }
     }
@@ -64,11 +68,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
 
     public class MyViewHolder extends  RecyclerView.ViewHolder{
         private TextView message;
-        private LinearLayout main;
+        private TextView name;
+//        private LinearLayout main;
+        private CardView main;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.message);
-            main = itemView.findViewById(R.id.messageLinear);
+            main = itemView.findViewById(R.id.card_message);
+            name = itemView.findViewById(R.id.userName);
         }
     }
 

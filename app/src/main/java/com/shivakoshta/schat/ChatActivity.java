@@ -49,12 +49,14 @@ public class ChatActivity extends AppCompatActivity {
         databaseReferenceSender.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                messageAdapter.clear();
+//                messageAdapter.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren())
                 {
                     MessageModel messageModel = dataSnapshot.getValue(MessageModel.class);
                     messageAdapter.add(messageModel);
                 }
+
+
             }
 
             @Override
@@ -78,7 +80,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessege(String messageToSend) {
         String messageUid = UUID.randomUUID().toString();
-        MessageModel messageModel = new MessageModel(messageUid,FirebaseAuth.getInstance().getUid(),messageToSend);
+        long time = System.currentTimeMillis();
+        MessageModel messageModel = new MessageModel(messageUid,FirebaseAuth.getInstance().getUid(),messageToSend,FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),time);
         messageAdapter.add(messageModel);
         databaseReferenceSender
                 .child(messageUid)

@@ -4,11 +4,31 @@ public class MessageModel {
     private String msgID;
     private String senderID;
     private String message;
+    private String name;
+    private long time;
 
-    public MessageModel(String msgID, String senderID, String message) {
+    public MessageModel(String msgID, String senderID, String message,String name,long time) {
         this.msgID = msgID;
         this.senderID = senderID;
         this.message = message;
+        this.name = name;
+        this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public MessageModel() {

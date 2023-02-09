@@ -55,8 +55,7 @@ public class ChatActivity extends AppCompatActivity {
                     MessageModel messageModel = dataSnapshot.getValue(MessageModel.class);
                     messageAdapter.add(messageModel);
                 }
-
-
+                binding.recyclerChat.scrollToPosition(messageAdapter.getLength()-1);
             }
 
             @Override
@@ -64,10 +63,12 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
         binding.sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String messageToSend = binding.messageEd.getText().toString();
+                binding.recyclerChat.scrollToPosition(messageAdapter.getLength());
                 if(messageToSend.trim().length()>0)
                 {
                     sendMessege(messageToSend);
@@ -80,6 +81,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessege(String messageToSend) {
         String messageUid = UUID.randomUUID().toString();
+
         long time = System.currentTimeMillis();
         MessageModel messageModel = new MessageModel(messageUid,FirebaseAuth.getInstance().getUid(),messageToSend,FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),time);
         messageAdapter.add(messageModel);

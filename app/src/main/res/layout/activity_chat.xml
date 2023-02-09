@@ -13,26 +13,47 @@
         android:layout_height="match_parent"
         android:layout_above="@id/sendMessageLayout"/>
         <RelativeLayout
-            android:padding="15dp"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:id="@+id/sendMessageLayout">
-            <EditText
-                android:padding="15dp"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/messageEd"
-                android:hint="Message"
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <ImageView
-                android:id="@+id/sendMessage"
-                android:padding="15dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/send_image"/>
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="2dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/messageEd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:hint="Message"
+                        android:padding="15dp"
+                        android:layout_weight="9"
+                        android:textSize="16dp"/>
+
+                    <ImageView
+                        android:id="@+id/sendMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="0"
+                        android:padding="15dp"
+                        android:src="@drawable/send_image" />
+                </LinearLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+
         </RelativeLayout>
 
 </RelativeLayout>

@@ -29,15 +29,17 @@
                     android:layout_height="wrap_content"
                     android:weightSum="10"
                     android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/messageEd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:hint="Message"
-                        android:padding="15dp"
                         android:layout_weight="9"
-                        android:textSize="16dp"/>
+                        android:hint="Message..."
+                        android:padding="15dp"
+                        android:textSize="16dp"
+                        android:background="@color/greyish_transparent"/>
 
                     <ImageView
                         android:id="@+id/sendMessage"
@@ -47,7 +49,8 @@
                         android:layout_centerVertical="true"
                         android:layout_weight="0"
                         android:padding="15dp"
-                        android:src="@drawable/send_image" />
+                        android:src="@drawable/send_image"
+                        android:background="@color/greyish_transparent"/>
                 </LinearLayout>
 
 

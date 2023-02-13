@@ -12,5 +12,9 @@
     <color name="fb_blue">#4267B2</color>
     <color name="messenger_blueDark">#0058D3</color>
     <color name="messenger_blue">#006AFF</color>
+    <color name="greyish_transparent">#1A000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="self_message_color">#217DFF</color>
+
 
 </resources>

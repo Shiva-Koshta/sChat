@@ -1,9 +1,12 @@
 package com.shivakoshta.schat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,19 +76,31 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         MessageModel messageModel = messageModelsList.get(position);
+        holder.messageLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, ""+ position, Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.message.setText(messageModel.getMessage());
-        holder.name.setText(messageModel.getName());
-        if(messageModel.getSenderID().equals(FirebaseAuth.getInstance().getUid()))
+//        holder.name.setText(messageModel.getName());
+        if(messageModel.getSenderID().equals(FirebaseAuth.getInstance().getUid()))//self message is of different color
         {
-//            holder.main.setBackgroundColor(context.getResources().getColor(R.color.messenger_blue));
-            holder.message.setBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.messageLinear.setBackgroundColor(context.getResources().getColor(R.color.self_message_color));
+            holder.message.setBackgroundColor(context.getResources().getColor(R.color.self_message_color));
+            holder.message.setTextColor(context.getResources().getColor(R.color.white));
+//            holder.userImage.setImageDrawable(R.drawable.transparent);
+            holder.userImage.setColorFilter(context.getResources().getColor(R.color.self_message_color));
+            holder.message.setGravity(Gravity.END);
+
         }
         else
         {
-//            holder.main.setBackgroundColor(context.getResources().getColor(R.color.black));
+         holder.messageLinear.setBackgroundColor(context.getResources().getColor(R.color.white));
             holder.message.setBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.message.setTextColor(context.getResources().getColor(R.color.black));
         }
     }
 
@@ -96,14 +111,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHo
 
     public class MyViewHolder extends  RecyclerView.ViewHolder{
         private TextView message;
-        private TextView name;
-//        private LinearLayout main;
-        private CardView main;
+//        private TextView name;
+        private LinearLayout messageLinear;
+        private ImageView userImage;
+//        private CardView main;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.message);
-            main = itemView.findViewById(R.id.card_message);
-            name = itemView.findViewById(R.id.userName);
+            userImage = itemView.findViewById(R.id.userImage);
+//            main = itemView.findViewById(R.id.card_message);
+//            name = itemView.findViewById(R.id.userName);
+            messageLinear = itemView.findViewById(R.id.messageLinear);
+
         }
     }
 

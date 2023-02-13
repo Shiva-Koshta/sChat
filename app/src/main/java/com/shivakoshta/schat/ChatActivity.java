@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         databaseReferenceSender = FirebaseDatabase.getInstance().getReference("chats").child(senderRoom);
         databaseReferenceReciever = FirebaseDatabase.getInstance().getReference("chats").child(recieverRoom);
 
-        databaseReferenceSender.addValueEventListener(new ValueEventListener() {
+        databaseReferenceSender.orderByKey().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                messageAdapter.clear();
@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(ChatActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -83,14 +83,45 @@ public class ChatActivity extends AppCompatActivity {
         String messageUid = UUID.randomUUID().toString();
 
         long time = System.currentTimeMillis();
+        String key = String.valueOf(time);
         MessageModel messageModel = new MessageModel(messageUid,FirebaseAuth.getInstance().getUid(),messageToSend,FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),time);
         messageAdapter.add(messageModel);
-        databaseReferenceSender
-                .child(messageUid)
-                .setValue(messageModel);
-        databaseReferenceReciever
-                .child(messageUid)
-                .setValue(messageModel);
+        databaseReferenceSender.child(key).setValue(messageModel);
+        databaseReferenceReciever.child(key).setValue(messageModel);
 
     }
 }
+/*
+public class MainActivity {
+
+  private DatabaseReference databaseReference;
+
+  // Method to store data in the Firebase Realtime Database
+  public void storeDataInFirebase(String data) {
+    databaseReference = FirebaseDatabase.getInstance().getReference("Data");
+    // Generate a unique key based on the current time
+    String key = String.valueOf(System.currentTimeMillis());
+    databaseReference.child(key).setValue(data);
+  }
+
+  // Method to retrieve data from the Firebase Realtime Database
+  public void retrieveDataFromFirebase() {
+    databaseReference = FirebaseDatabase.getInstance().getReference("Data");
+    databaseReference.orderByKey().addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+          String data = snapshot.getValue(String.class);
+          // Use the data as needed
+        }
+      }
+
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+        // Handle errors here
+      }
+    });
+  }
+}
+
+ */
